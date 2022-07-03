@@ -37,7 +37,7 @@ const hour_now = moment().format('HH:mm:ss')
 //Lib
 const { pinterest, wallpaper, wikimedia, quotesAnime } = require('../lib/scraper')
 const { bytesToSize, TelegraPh, UploadFileUgu, webp2mp4File} = require('../lib/uploader')
-const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
+const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('../lib/myfunc')
 
 //database
 global.db = JSON.parse(fs.readFileSync('./storage/db.json'))
