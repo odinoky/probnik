@@ -17,10 +17,26 @@ const PhoneNumber = require('awesome-phonenumber')
 const lolcatjs = require('lolcatjs')
 const {Boom} = require("@hapi/boom")
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif')
-const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
+const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
 const { state, saveState } = useSingleFileAuthState(`./${global.sessionName}.json`)
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
+
+
+
+
+store.bind(ichiInc.ev)
+
+ichiInc.ws.on('CB:call', async (json) => {
+const callerId = json.content[0].attrs['call-creator']
+if (json.content[0].tag == 'offer') {
+let pa7rick = await ichiInc.sendContact(callerId, global.owner)
+ichiInc.sendMessage(callerId, { text: `Automatic block system!\nDon't call bot!\nPlease contact the owner to open !`}, { quoted : pa7rick })
+ichiInc.sendMessage(`916909137213@s.whatsapp.net`, {text: `*Report Bot:* Someone Called Bot`})
+await sleep(8000)
+await ichiInc.updateBlockStatus(callerId, "block")
+}
+})
 
 //Starting In Console
 async function startIchigo(){
