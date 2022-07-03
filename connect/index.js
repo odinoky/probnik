@@ -24,9 +24,6 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 
 
 
-
-store.bind(ichiInc.ev)
-
 ichiInc.ws.on('CB:call', async (json) => {
 const callerId = json.content[0].attrs['call-creator']
 if (json.content[0].tag == 'offer') {
