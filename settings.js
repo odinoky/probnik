@@ -11,7 +11,7 @@ const chalk = require('chalk')
 // Website Api
 
 //Ubah Disini
-global.ownerNumber = ['77072763560']
+global.ownerNumber = ['996755994412']
 global.ownerName = '*ВАНИЛЬКА*'
 global.packname = 'стикеры'
 global.author = '*от ВАНИЛЬКИ*'

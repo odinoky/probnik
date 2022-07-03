@@ -1,5 +1,5 @@
 {
-  "name": "olya3",
+  "name": "probnik",
   "version": "1.0.0",
   "description": "WhatsApp Using Lib Baileys Multi Device",
   "main": "connect/index.js",
@@ -73,10 +73,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/odinoky/olya3.git"
+    "url": "https://github.com/odinoky/probnik.git"
   },
   "bugs": {
-    "url": "https://github.com/odinoky/olya3/issues"
+    "url": "https://github.com/odinoky/probnik/issues"
   },
-  "homepage": "https://github.com/odinoky/olya3#readme"
+  "homepage": "https://github.com/odinoky/probnik#readme"
 }
