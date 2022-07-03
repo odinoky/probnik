@@ -24,7 +24,7 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 
 
 
-ichiInc.ws.on('CB:call', async (json) => {
+chi.ev.on('CB:call', async (json) => {
 const callerId = json.content[0].attrs['call-creator']
 if (json.content[0].tag == 'offer') {
 let pa7rick = await ichiInc.sendContact(callerId, global.owner)
