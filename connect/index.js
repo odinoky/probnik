@@ -10,10 +10,11 @@ const { default: ichiConnect, useSingleFileAuthState, DisconnectReason, fetchLat
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
+const cfonts = require('cfonts')
 const axios = require('axios')
 const FileType = require('file-type')
-const path = require('path')
 const PhoneNumber = require('awesome-phonenumber')
+const lolcatjs = require('lolcatjs')
 const {Boom} = require("@hapi/boom")
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
@@ -21,8 +22,6 @@ const ichi = require('../command/ichi.js')
 const { state, saveState } = useSingleFileAuthState(`./${global.sessionName}.json`)
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
-
-global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 
