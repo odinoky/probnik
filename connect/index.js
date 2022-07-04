@@ -26,7 +26,7 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 
 async function startichi() 
-    let { version, isLatest } = await fetchLatestBaileysVersion()
+    let { version, isLatest } = await fetchLatestBaileysVersion(" ")
     const ichi = ichiConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
