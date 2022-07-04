@@ -10,11 +10,10 @@ const { default: ichiConnect, useSingleFileAuthState, DisconnectReason, fetchLat
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
-const cfonts = require('cfonts')
 const axios = require('axios')
 const FileType = require('file-type')
+const path = require('path')
 const PhoneNumber = require('awesome-phonenumber')
-const lolcatjs = require('lolcatjs')
 const {Boom} = require("@hapi/boom")
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
@@ -27,7 +26,7 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 
-async function startichi()
+async function startichi() 
     let { version, isLatest } = await fetchLatestBaileysVersion()
     const ichi = ichiConnect({
         logger: pino({ level: 'silent' }),
@@ -50,6 +49,8 @@ await sleep(8000)
 await ichi.updateBlockStatus(callerId, "block")
 }
 })
+
+XeonBotInc.ev.on('messages.upsert', async chatUpdate => {
 
 //Starting In Console
 async function startIchigo(){
@@ -668,5 +669,6 @@ fs.unwatchFile(file)
 console.log(chalk.redBright(`Update ${__filename}`))
 delete require.cache[file]
 require(file)
+})
 
 })
