@@ -10,6 +10,8 @@ let handler = async (m, {
 		conn.reply(m.chat, `*Format salah! Contoh :*\n\n	*○ ${usedPrefix + command} on*\n	*○ ${usedPrefix + command} off*`, m)
 	}
 	switch (text) {
+		case "включить":
+		case "вкл":
 		case "on":
 		case "enable":
 			let cek = db.data.chats[m.chat].reminder
@@ -18,6 +20,8 @@ let handler = async (m, {
 			db.data.chats[m.chat].reminder = true
 			conn.reply(m.chat, `*reminder berhasil diaktifkan.*`, m)
 			break
+		case "выключить":
+		case "выкл":
 		case "off":
 		case "disable":
 			let ce = db.data.chats[m.chat].reminder
