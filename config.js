@@ -87,11 +87,8 @@ global.log = async function log(data, data2, data3) {
 		return console.log(data, data2, data3)
 	}
 }
-global.owner = [
-	//  ['6281234288573'],
-	//['12546153210'],
-	//['62895368900456'],
-	['62895368900456', 'Benniismael', true]
+global.owner = ['77072763560'
+	['77072763560', 'Benniismael', true]
 	// [number, dia creator/owner?, dia developer?]
 ] // Put your number here
 global.mods = [] // Want some help?
@@ -104,12 +101,12 @@ global.APIs = { // API Prefix
 }
 global.APIKeys = { // APIKey Here
 	// 'https://website': 'apikey'
-	'https://ghostui-api.herokuapp.com/': 'salahlo'
+	'https://zenzapis.xyz': '192e24e3a9b2'
 }
 // Sticker WM
 global.packname = 'ig : Beni_230\'Benniismael'
 global.author = 'BENNIISMAEL & GHOST'
-global.nomorown = '62895368900456'
+global.nomorown = '77072763560'
 global.multiplier = 69 // The higher, The harder levelup
 global.titlebot = `⫹⫺ RPG BOT Whatsapp | By ${author}`
 global.rpg = {
