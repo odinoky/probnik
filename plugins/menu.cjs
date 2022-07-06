@@ -362,9 +362,9 @@ let handler = async (m, {
 		throw conn.reply(conn.user.jid, await e, m)
 	}
 }
-handler.help = ['menuu', 'help', '?']
+handler.help = ['menu', 'help', '?']
 handler.tags = ['main']
-handler.command = /^(menuu|help|\?)$/i
+handler.command = /^(menu|help|\?)$/i
 
 module.exports = handler
 
