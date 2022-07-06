@@ -101,7 +101,7 @@ global.APIs = { // API Prefix
 }
 global.APIKeys = { // APIKey Here
 	// 'https://website': 'apikey'
-	'https://zenzapis.xyz': '192e24e3a9b2'
+	'https://ghostui-api.herokuapp.com/': 'salahlo'
 }
 // Sticker WM
 global.packname = 'ig : Beni_230\'Benniismael'
