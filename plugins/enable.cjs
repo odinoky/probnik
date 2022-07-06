@@ -16,6 +16,7 @@ let handler = async (m, {
 	let isAll = false
 	let isUser = false
 	switch (type) {
+		case 'приветствие':
 		case 'welcome':
 			if (!m.isGroup) {
 				if (!isOwner) {
