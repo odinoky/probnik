@@ -1,6 +1,6 @@
 {
   "users": {
-    "12546153210@s.whatsapp.net": {
+    "77072763560@s.whatsapp.net": {
       "exp": 115,
       "limit": 100,
       "lastclaim": 0,
@@ -308,7 +308,7 @@
       "petFood": 0,
       "catexp": 0
     },
-    "6281234288573@s.whatsapp.net": {
+    "77072763560@s.whatsapp.net": {
       "exp": 0,
       "limit": 100,
       "lastclaim": 0,
@@ -494,7 +494,7 @@
       "petFood": 0,
       "catexp": 0
     },
-    "62895368900456@s.whatsapp.net": {
+    "77072763560@s.whatsapp.net": {
       "exp": 295,
       "limit": 100,
       "lastclaim": 0,
@@ -9690,7 +9690,7 @@
     }
   },
   "chats": {
-    "12546153210@s.whatsapp.net": {
+    "77072763560@s.whatsapp.net": {
       "isBanned": false,
       "welcome": false,
       "detect": false,
@@ -9732,7 +9732,7 @@
       "antiToxic": false,
       "expired": 0
     },
-    "6281234288573@s.whatsapp.net": {
+    "77072763560@s.whatsapp.net": {
       "isBanned": false,
       "welcome": false,
       "detect": false,
@@ -9997,7 +9997,7 @@
   "msgs": {},
   "sticker": {},
   "settings": {
-    "12546153210@s.whatsapp.net": {
+    "77072763560@s.whatsapp.net": {
       "self": true,
       "autoread": false,
       "restrict": false
