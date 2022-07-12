@@ -1,1 +1,1 @@
-web: node . anu --server
+worker : npm i && npm update && node .

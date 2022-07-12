@@ -1,74 +1,49 @@
-# BOTSTYLEE _ GAMES
+<p align="center">
+<img src="https://telegra.ph/file/31bf36bba2151033b71d4.jpg" alt="RadBot" width="200"/>
 
-<a href="https://github.com/botstylee/botstylee/network/members"><img title="Forks" src="https://img.shields.io/github/forks/findme-19/antibot_md?label=Forks&color=blue&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/findme-19/antibot_md?label=Watchers&color=green&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/findme-19/antibot_md?label=Stars&color=yellow&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/graphs/contributors"><img title="Contributors" src="https://img.shields.io/github/contributors/findme-19/antibot_md?label=Contributors&color=blue&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/issues"><img title="Issues" src="https://img.shields.io/github/issues/findme-19/antibot_md?label=Issues&color=success&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/issues?q=is%3Aissue+is%3Aclosed"><img title="Issues" src="https://img.shields.io/github/issues-closed/findme-19/antibot_md?label=Issues&color=red&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/pulls"><img title="Pull Request" src="https://img.shields.io/github/issues-pr/findme-19/antibot_md?label=PullRequest&color=success&style=flat-square"></a>
-<a href="https://github.com/botstylee/botstylee/pulls?q=is%3Apr+is%3Aclosed"><img title="Pull Request" src="https://img.shields.io/github/issues-pr-closed/findme-19/antibot_md?label=PullRequest&color=red&style=flat-square"></a>
+</p>
+<h1 align="center">NUMPANG NAMA DOANG KOK BANGGA</h1>
+<p align="center"> <a href="https://Lexxy24.github.io"> <img src="https://readme-typing-svg.herokuapp.com?size=15&width=280&lines=Created+By+Fahzz+Aowkwowkwk" alt="Lexxy Official" /> </a> </p>
+<p align="center">
+<a href="#"><img title="Shiro-Botz" src="https://img.shields.io/badge/GANTI SESSIONNYA DULU SEBELUM PAKAI-red?colorA=%255ff0000&colorB=%23017e40&style=for-the-badge"></a>
+</p>
+<p align="center">
+</p> 
+
+---
+
+# Timdak work di termux!
 
 
-#### Deploy to Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/botstylee/botstylee)
+## Deploy to heroku
 
-#### Heroku Buildpack
-| BuildPack | LINK |
-|--------|--------|
-| **FFMPEG** |[here](https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest) |
-| **IMAGEMAGICK** | [here](https://github.com/DuckyTeam/heroku-buildpack-imagemagick) |
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Drz103/RadBot)
 
-### FOR TERMUX USER
-1. Type mentioned below given commands one by one in Termux.
-```sh
-$ pkg upgrade && pkg update && pkg install git nodejs ffmpeg imagemagick nano bash mc -y
-$ git clone https://github.com/botstylee/botstylee
-$ cd botstylee
-$ npm i 
-$ node .
-```
-2. Wait for bot starting...
-3. Scan QR code from 2nd device. (Go to whatsapp > Linked Devices > Join `Multi Device Beta` > Click on `link device`)
-4. Now your bot is ready to rock n roll.
-
----------
-
-## INSTALL ON TERMUX WITH UBUNTU
-
-[ INSTALLING UBUNTU ]
-
-```bash
-apt update && apt full-upgrade
-apt install wget curl git proot-distro
-proot-distro install ubuntu
-echo "proot-distro login ubuntu" > $PREFIX/bin/ubuntu
-ubuntu
-```
----------
-
-[ INSTALLING REQUIRED PACKAGES ]
-
-```bash
-ubuntu
-apt update && apt full-upgrade
-apt install wget curl git ffmpeg imagemagick build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev dbus-x11 ffmpeg2theora ffmpegfs ffmpegthumbnailer ffmpegthumbnailer-dbg ffmpegthumbs libavcodec-dev libavcodec-extra libavcodec-extra58 libavdevice-dev libavdevice58 libavfilter-dev libavfilter-extra libavfilter-extra7 libavformat-dev libavformat58 libavifile-0.7-bin libavifile-0.7-common libavifile-0.7c2 libavresample-dev libavresample4 libavutil-dev libavutil56 libpostproc-dev libpostproc55 graphicsmagick graphicsmagick-dbg graphicsmagick-imagemagick-compat graphicsmagick-libmagick-dev-compat groff imagemagick-6.q16hdri imagemagick-common libchart-gnuplot-perl libgraphics-magick-perl libgraphicsmagick++-q16-12 libgraphicsmagick++1-dev
+Heroku Buildpack
+```bash 
+> heroku/nodejs 
+> https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest 
+> https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git
 ```
 
----------
+Tutorial YouTube
 
-[ INSTALLING NODEJS & antibot_md ]
+[![YouTube](https://img.shields.io/badge/YouTube-Video-red)](https://youtu.be/DzNIL45qHaM)
 
-```bash
-ubuntu
-curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-apt install -y nodejs gcc g++ make
-git clone https://github.com/botstylee/botstylee
-cd botstylee
-npm install
-npm update
+## settings 
+Edit Nomor Owner DLL `'./config.js'`
+```ts 
+OwnerNumber = ['wa.me/6287892711054']
+GithubOwner = ['https://github.com/Hyzerr']
+GroupOwner = ['https://chat.whatsapp.com/EheAWPrQMhV25xW0N7l7WD']
+Apikey? = Apikey kalian, tidak paham? chat saya di wangsaf!
+
+Thumbnail
+global.image = 'https://telegra.ph/file/4f4a5a3cde6a98a96da79.jpg'//change the image
+global.bank = 'https://telegra.ph/file/d5ddf4cc627bb0e6bc420.jpg'
+global.kandang = 'https://telegra.ph/file/67a6ee607d03a4e52757d.jpg'
+global.kolam = 'https://telegra.ph/file/5aa5dfa3394477e11fb18.jpg'
 ```
-
 ---------
 
 ## FOR WINDOWS/VPS/RDP USER
@@ -79,8 +54,8 @@ npm update
 * Download And Install ImageMagick [`Click Here`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/botstylee/botstylee
-cd botstylee
+git clone https://github.com/Hyzerr/Hyzer-V3
+cd RadBot
 npm install
 npm update
 ```
@@ -95,120 +70,6 @@ node .
 
 ---------
 
-## Arguments `node . [--options] [<session name>]`
-
-### `--self`
-
-Activate self mode (Ignores other)
-
-### `--pconly`
-
-If that chat not from private bot, bot will ignore
-
-### `--gconly`
-
-If that chat not from group, bot will ignore
-
-### `--swonly`
-
-If that chat not from status, bot will ignore
-
-### `--prefix <prefixes>`
-
-* `prefixes` are seperated by each character
-Set prefix
-
-### `--server`
-
-Used for [heroku](https://heroku.com/) or scan through website
-
-### `--big-qr`
-
-If small qr unicode doesn't support
-
-### `--restrict`
-
-Enables restricted plugins (which can lead your number to be **banned** if used too often)
-
-* Group Administration `add, kick`
-
-### `--img`
-
-Enable image inspector through terminal
-
-### `--autoread`
-
-If enabled, all incoming messages will be marked as read
-
-### `--nyimak`
-
-No bot, just print received messages and add users to database
-
-### `--test`
-
-**Development** Testing Mode
-
-### `--trace`
-
-```js
-conn.logger.level = 'trace'
-```
-
-### `--debug`
-
-```js
-conn.logger.level = 'debug'
-```
-
----------
-
-## How To Customise Message Display
-
-### Hydrated Buttons Image Location
-```bash
-conn.sendHydrated(m.chat, 'text', 'footer', 'buffer', 'template-url', 'Template-Name', '0123456789', 'Template-CALL', [
-      ['Donate', '/donasi'],
-      ['Speed', '/ping'],
-      ['Owner', '/owner']
-], m, {asLocation: true})
-```
-
-### Remove Call Button
-```bash
-conn.sendHydrated(m.chat, 'text', 'footer', 'buffer', 'template-url', 'Template-Name', null, null, [
-      ['Donate', '/donasi'],
-      ['Speed', '/ping'],
-      ['Owner', '/owner']
-    ], m, {asLocation: true})
-```
-
-### Remove Both Template & Call Button
-```bash
-conn.sendHydrated(m.chat, 'text', 'footer', 'buffer', null, null, null, null, [
-      ['Donate', '/donasi'],
-      ['Speed', '/ping'],
-      ['Owner', '/owner']
-    ], m, {asLocation: true})
-```
-### Add/Remove/Edit Buttons
-* To remove button, delete `['button', '/button']` line.
-* To add button, add `['button', '/button']` code line.
-* To edit button, edit `button` name.
-```bash
-conn.sendHydrated(m.chat, 'text', 'footer', 'buffer', null, null, null, null, [
-      ['Button¹', '/button¹'],
-      ['Button²', '/button²'],
-      ['Button³', '/button³']
-    ], m, {asLocation: true})
-```
-
----------
-
-### Thanks To 
-**Allah SWT**
-
-[![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
-[![BochilGaming](https://github.com/BochilGaming.png?size=100)](https://github.com/BochilGaming)
-[![Botstylee](https://github.com/Botstylee.png?size=100)](https://github.com/Botstylee)
-#### Contributor
-[![Botstylee](https://github.com/botstylee.png?size=100)](https://github.com/Botstylee)
+# My Sosial 
+- [Group ](https://chat.whatsapp.com/EheAWPrQMhV25xW0N7l7WD) 
+- [Whatsapp ](https://wa.me/6285754180729)

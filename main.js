@@ -1,199 +1,242 @@
-// TODO: reduce global variabel usage
+require('./config.js')
+const { WAConnection: _WAConnection } = require('@adiwajshing/baileys')
+const cloudDBAdapter = require('./lib/cloudDBAdapter')
+const { generate } = require('qrcode-terminal')
+const syntaxerror = require('syntax-error')
+const simple = require('./lib/simple')
+//  const logs = require('./lib/logs')
+const { promisify } = require('util')
+const yargs = require('yargs/yargs')
+const Readline = require('readline')
+const cp = require('child_process')
+const _ = require('lodash')
+const path = require('path')
+const fs = require('fs')
+var low
+try {
+  low = require('lowdb')
+} catch (e) {
+  low = require('./lib/lowdb')
+}
+const { Low, JSONFile } = low
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-process.on('uncaughtException', console.error)
+const rl = Readline.createInterface(process.stdin, process.stdout)
+const WAConnection = simple.WAConnection(_WAConnection)
 
-import './config.js';
-import path, {
-	join
-} from 'path'
-import fs, {
-	readdirSync,
-	statSync,
-	unlinkSync,
-} from 'fs'
-import {
-	spawn
-} from 'child_process'
-import {
-	tmpdir
-} from 'os'
-import {
-	protoType,
-	serialize
-} from './lib/simple.js'
-import plug, {
-	plugins,
-	filesInit,
-	reload
-} from './lib/plugins.js'
-import Connection from './lib/connection.js'
-import db, {
-	loadDatabase
-} from './lib/database.js'
-import axios from 'axios';
-import former from 'form-data';
-import cheri from 'cheerio';
-import fetch from 'node-fetch';
-import Helper from './lib/helper.js';
-global.fetch = fetch
-global.fs = fs
-global.axios = axios
-global.former = former
-global.cheerio = cheri
-global.db = db
-global.loadDatabase = loadDatabase()
-global.delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
-
-protoType()
-serialize()
-if (db.data == null) loadDatabase
-global.plugins = (await import('./lib/plugins.js')).plugins
-Object.assign(global, Helper)
-// global.Fn = function functionCallBack(fn, ...args) { return fn.call(Connection.conn, ...args) }
+global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 global.timestamp = {
-	start: new Date
+  start: new Date
+}
+// global.LOGGER = logs()
+const PORT = process.env.PORT || 3000
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+
+global.prefix = new RegExp('^[' + (opts['prefix'] || '‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
+
+global.db = new Low(
+  /https?:\/\//.test(opts['db'] || '') ?
+  new cloudDBAdapter(opts['db']) :
+  new JSONFile(`${opts._[0] ? opts._[0] + '_' : ''}database.json`)
+)
+global.DATABASE = global.db // Backwards Compatibility
+
+global.conn = new WAConnection()
+let authFile = `${opts._[0] || 'RadBotZ'}.json`
+if (fs.existsSync(authFile)) conn.loadAuthInfo(authFile)
+if (opts['trace']) conn.logger.level = 'trace'
+if (opts['debug']) conn.logger.level = 'debug'
+if (opts['big-qr'] || opts['server']) conn.on('qr', qr => generate(qr, { small: false }))
+if (!opts['test']) setInterval(async () => {
+  await global.db.write()
+}, 60 * 1000) // Save every minute
+if (opts['server']) require('./server')(global.conn, PORT)
+
+if (opts['test']) {
+  conn.user = {
+    jid: '2219191@s.whatsapp.net',
+    name: 'test',
+    phone: {}
+  }
+  conn.prepareMessageMedia = (buffer, mediaType, options = {}) => {
+    return {
+      [mediaType]: {
+        url: '',
+        mediaKey: '',
+        mimetype: options.mimetype || '',
+        fileEncSha256: '',
+        fileSha256: '',
+        fileLength: buffer.length,
+        seconds: options.duration,
+        fileName: options.filename || 'file',
+        gifPlayback: options.mimetype == 'image/gif' || undefined,
+        caption: options.caption,
+        ptt: options.ptt
+      }
+    }
+  }
+
+  conn.sendMessage = async (chatId, content, type, opts = {}) => {
+    let message = await conn.prepareMessageContent(content, type, opts)
+    let waMessage = await conn.prepareMessageFromContent(chatId, message, opts)
+    if (type == 'conversation') waMessage.key.id = require('crypto').randomBytes(16).toString('hex').toUpperCase()
+    conn.emit('chat-update', {
+      jid: conn.user.jid,
+      hasNewMessage: true,
+      count: 1,
+      messages: {
+        all() {
+          return [waMessage]
+        }
+      }
+    })
+  }
+  rl.on('line', line => conn.sendMessage('123@s.whatsapp.net', line.trim(), 'conversation'))
+} else {
+  rl.on('line', line => {
+    process.send(line.trim())
+  })
+  conn.connect().then(async () => {
+    await global.db.read()
+    global.db.data = {
+      users: {},
+      chats: {},
+      stats: {},
+      msgs: {},
+      sticker: {},
+      settings: {},
+      ...(global.db.data || {})
+    }
+    global.db.chain = _.chain(global.db.data)
+    fs.writeFileSync(authFile, JSON.stringify(conn.base64EncodedAuthInfo(), null, '\t'))
+    global.timestamp.connect = new Date
+  })
+}
+process.on('uncaughtException', console.error)
+// let strQuot = /(["'])(?:(?=(\\?))\2.)*?\1/
+
+let isInit = true
+global.reloadHandler = function () {
+  let handler = require('./handler')
+  if (!isInit) {
+    conn.off('chat-update', conn.handler)
+    conn.off('message-delete', conn.onDelete)
+    conn.off('group-participants-update', conn.onParticipantsUpdate)
+    conn.off('CB:action,,call', conn.onCall)
+  }
+  conn.welcome = 'Hai @user\n Selamat Datang Di Grup:\n*@subject*'
+  conn.bye = 'Selamat Tinggal @user!\nTerimakasih Telah Bergabung Di Grup\n\nDadah👋'
+  conn.spromote = 'Selamat @user Anda Sekarang Adalah Admin'
+  conn.sdemote = 'Kasian @user Di Unadmin'
+  conn.handler = handler.handler
+  conn.onDelete = handler.delete
+  conn.onParticipantsUpdate = handler.participantsUpdate
+  conn.onCall = handler.onCall
+  conn.on('chat-update', conn.handler)
+  conn.on('message-delete', conn.onDelete)
+  conn.on('group-participants-update', conn.onParticipantsUpdate)
+  conn.on('CB:action,,call', conn.onCall)
+  if (isInit) {
+    conn.on('error', conn.logger.error)
+    conn.on('close', () => {
+      setTimeout(async () => {
+        try {
+          if (conn.state === 'close') {
+            if (fs.existsSync(authFile)) await conn.loadAuthInfo(authFile)
+            await conn.connect()
+            fs.writeFileSync(authFile, JSON.stringify(conn.base64EncodedAuthInfo(), null, '\t'))
+            global.timestamp.connect = new Date
+          }
+        } catch (e) {
+          conn.logger.error(e)
+        }
+      }, 5000)
+    })
+  }
+  isInit = false
+  return true
 }
 
-const __dirname = global.__dirname(
-	import.meta.url)
-
-// global.opts['db'] = process.env['db']
-
-global.conn = await Connection.conn
-global.store = Connection.store
-// load plugins
-const pluginFolder = global.__dirname(join(__dirname, './plugins/index'))
-const pluginFilter = filename => /\.(mc)?cjs$/.test(filename)
-filesInit(pluginFolder, pluginFilter, conn).then(_ => console.log(Object.keys(plugins))).catch(console.error)
-
-Object.freeze(reload)
-
-
-if (!opts['test']) {
-	setInterval(async () => {
-		if (db.data) await db.write().catch(console.error)
-		if (opts['autocleartmp']) try {
-			clearTmp()
-		} catch (e) {
-			console.error(e)
-		}
-		Connection.store.writeToFile(Connection.storeFile)
-	}, 60 * 1000)
+// Plugin Loader
+let pluginFolder = path.join(__dirname, 'plugins')
+let pluginFilter = filename => /\.js$/.test(filename)
+global.plugins = {}
+for (let filename of fs.readdirSync(pluginFolder).filter(pluginFilter)) {
+  try {
+    global.plugins[filename] = require(path.join(pluginFolder, filename))
+  } catch (e) {
+    conn.logger.error(e)
+    delete global.plugins[filename]
+  }
 }
-if (opts['server'])(await import('./server.js')).default(conn, PORT)
-
-
-function clearTmp() {
-	const tmp = [tmpdir(), join(__dirname, './tmp')]
-	const filename = []
-	tmp.forEach(dirname => readdirSync(dirname).forEach(file => filename.push(join(dirname, file))))
-	return filename.map(file => {
-		const stats = statSync(file)
-		if (stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3)) return unlinkSync(file) // 3 minutes
-		return false
-	})
+console.log(Object.keys(global.plugins))
+global.reload = (_event, filename) => {
+  if (pluginFilter(filename)) {
+    let dir = path.join(pluginFolder, filename)
+    if (dir in require.cache) {
+      delete require.cache[dir]
+      if (fs.existsSync(dir)) conn.logger.info(`re - require plugin '${filename}'`)
+      else {
+        conn.logger.warn(`deleted plugin '${filename}'`)
+        return delete global.plugins[filename]
+      }
+    } else conn.logger.info(`requiring new plugin '${filename}'`)
+    let err = syntaxerror(fs.readFileSync(dir), filename)
+    if (err) conn.logger.error(`syntax error while loading '${filename}'\n${err}`)
+    else try {
+      global.plugins[filename] = require(dir)
+    } catch (e) {
+      conn.logger.error(e)
+    } finally {
+      global.plugins = Object.fromEntries(Object.entries(global.plugins).sort(([a], [b]) => a.localeCompare(b)))
+    }
+  }
 }
+Object.freeze(global.reload)
+fs.watch(path.join(__dirname, 'plugins'), global.reload)
+global.reloadHandler()
+
 
 
 // Quick Test
 async function _quickTest() {
-	let test = await Promise.all([
-		spawn('ffmpeg'),
-		spawn('ffprobe'),
-		spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-filter_complex', 'color', '-frames:v', '1', '-f', 'webp', '-']),
-		spawn('convert'),
-		spawn('magick'),
-		spawn('gm'),
-		spawn('find', ['--version'])
-	].map(p => {
-		return Promise.race([
-			new Promise(resolve => {
-				p.on('close', code => {
-					resolve(code !== 127)
-				})
-			}),
-			new Promise(resolve => {
-				p.on('error', _ => resolve(false))
-			})
-		])
-	}))
-	let [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find] = test
-	console.log(test)
-	let s = global.support = {
-		ffmpeg,
-		ffprobe,
-		ffmpegWebp,
-		convert,
-		magick,
-		gm,
-		find
-	}
-	// require('./lib/sticker').support = s
-	Object.freeze(global.support)
+  let test = await Promise.all([
+    cp.spawn('ffmpeg'),
+    cp.spawn('ffprobe'),
+    cp.spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-filter_complex', 'color', '-frames:v', '1', '-f', 'webp', '-']),
+    cp.spawn('convert'),
+    cp.spawn('magick'),
+    cp.spawn('gm'),
+  ].map(p => {
+    return Promise.race([
+      new Promise(resolve => {
+        p.on('close', code => {
+          resolve(code !== 127)
+        })
+      }),
+      new Promise(resolve => {
+        p.on('error', _ => resolve(false))
+      })
+    ])
+  }))
+  let [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm] = test
+  console.log(test)
+  let s = global.support = {
+    ffmpeg,
+    ffprobe,
+    ffmpegWebp,
+    convert,
+    magick,
+    gm
+  }
+  require('./lib/sticker').support = s
+  Object.freeze(global.support)
 
-	if (!s.ffmpeg)(conn?.logger || console).warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
-	if (s.ffmpeg && !s.ffmpegWebp)(conn?.logger || console).warn('Stickers may not animated without libwebp on ffmpeg (--enable-ibwebp while compiling ffmpeg)')
-	if (!s.convert && !s.magick && !s.gm)(conn?.logger || console).warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
+  if (!s.ffmpeg) conn.logger.warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
+  if (s.ffmpeg && !s.ffmpegWebp) conn.logger.warn('Stickers may not animated without libwebp on ffmpeg (--enable-ibwebp while compiling ffmpeg)')
+  if (!s.convert && !s.magick && !s.gm) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
 }
-async function expired() {
-	return new Promise(async (resolve, reject) => {
-		let user = Object.keys(db.data.users)
-		let chat = Object.keys(db.data.chats)
-		for (let jid of user) {
-			var users = db.data.users[jid]
-			var {
-				name,
-				premium,
-				expired
-			} = users
-			if (users.premium) {
-				if (Date.now() >= users.expired) {
-					users.premium = false
-					users.expired = 0
-					users.limitjoinprem = 0
-					users.limitjoinfree = 0
-					conn.reply(jid, 'hai\nmasa premium kamu sekarang sudah habis.\njika ingin memperpanjang lagi silahkan chat owner.\nterima kasih telah menggunakan bot :)\n' + `owner: @${nomorown}`, null, {
-						mentions: [nomorown + '@s.whatsapp.net']
-					})
-					resolve(console.log(`masa premium ${name} sudah habis`))
-				}
-			}
-			if (users.sewa) {
-				if (users.limitjoinprem == 0) {
-					users.sewa = false
-					users.limitjoinfree = 1
-				}
-			}
-		}
-		for (let id of chat) {
-			if (id.endsWith('g.us')) {
-				var chats = db.data.chats[id]
-				if (chats.grouprental) {
-					if (Date.now() >= chats.expired) {
-						chats.grouprental = false
-						chats.expired = 0
-						await conn.reply(id, `masa menetap di ${await conn.getName(id)} sudah habis.\nBot sebentar lagi akan keluar.\nterima kasih telah menggunakan bot kami.\nChat owner kami jika ingin menyewa lagi :)\nowner: @${nomorown}`, null, {
-							mentions: [nomorown + '@s.whatsapp.net']
-						})
-						await delay(3000)
-						await conn.groupLeave(id)
-						resolve(console.log(`masa menetap di ${await conn.getName(id)} sudah habis`))
-					}
-				}
-			}
-		}
-	})
-}
-setInterval(async () => {
-	var b = await expired()
-}, 1000)
-setInterval(async () => {
-	var a = await clearTmp()
-	console.log(`successfully clear tmp`)
-}, 180000)
+
 _quickTest()
-	.then(() => (conn?.logger.info || console.log)('Quick Test Done'))
-	.catch(console.error)
+  .then(() => conn.logger.info('Quick Test Done'))
+  .catch(console.error)
