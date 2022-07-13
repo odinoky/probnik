@@ -6,7 +6,6 @@ let package = require('./package.json')
 const CFonts = require('cfonts')
 async function startIchigo()
   
-var isRunning = false
 /**
  * Start a js file
  * @param {String} path `path/to/file`
