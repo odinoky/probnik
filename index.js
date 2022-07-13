@@ -6,16 +6,6 @@ let package = require('./package.json')
 const CFonts = require('cfonts')
 async function startIchigo()
   
-cfonts.say('ICHIGO',{
-font: 'block',
-gradient: ['red','magenta'],
-align: 'center'
-})
-cfonts.say('Whatsapp Bot By Fandyyy',{
-font: 'console',
-gradient: ['red','magenta'],
-align: 'center'
-})
 var isRunning = false
 /**
  * Start a js file
