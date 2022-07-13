@@ -9,9 +9,9 @@ async function startIchigo()
 var isRunning = false
 /**
  * Start a js file
- * @param {String} file `path/to/file`
+ * @param {String} path `path/to/file`
  */
-function start(file) {
+function start(path) {
   if (isRunning) return
   isRunning = true
   let args = [path.join(__dirname, file), ...process.argv.slice(2)]
