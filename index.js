@@ -3,17 +3,19 @@ let { spawn } = require('child_process')
 let path = require('path')
 let fs = require('fs')
 let package = require('./package.json')
-CFonts.say('Rpg\nWhatsApp Bot', {
-  font: 'chrome',
-  align: 'center',
-  gradient: ['red', 'magenta']
+const CFonts = require('cfonts')
+async function startIchigo()
+  
+cfonts.say('ICHIGO',{
+font: 'block',
+gradient: ['red','magenta'],
+align: 'center'
 })
-CFonts.say(`'${package.name}' By @${package.author.name || package.author}\nMikeBot ver 1.5.0\nRecode By Dawnfrost`, {
-  font: 'console',
-  align: 'center',
-  gradient: ['red', 'magenta']
+cfonts.say('Whatsapp Bot By Fandyyy',{
+font: 'console',
+gradient: ['red','magenta'],
+align: 'center'
 })
-
 var isRunning = false
 /**
  * Start a js file
