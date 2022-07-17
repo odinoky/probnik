@@ -1,102 +1,106 @@
-// Bismillahirrahmanirrahim
-// thank you to ALLAH Swt
-// thank you to Nurutomo as wabot-aq
-// thank you to ariffb as stikerinbot
-// thank you to botstylee
-// thank you to bochilgaming as games-wabot
-// thank you to benni ismael
-// thank you to zerochanBot
-// thank you to fernazer
-// thank you to MikeBot Dev Team
-// thank you to ALL Bot creator
-// and thanks you to who support my Bot
-let fs = require('fs')
-let chalk = require('chalk')
+import { watchFile, unwatchFile } from 'fs'
+import chalk from 'chalk'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
 
-global.linkGC = ['https://chat.whatsapp.com', ''] // ganti jadi group lu
-global.owner = ['996755994412'] // Masukan nomot kalian
-global.mods = ['996755994412'] // Moderator
-global.prems = JSON.parse(fs.readFileSync('./src/premium.json')) // Pengguna premium tidak memerlukan limit
+
+global.owner = [
+  ['5219992095479', '👑 Mystic - Creador 👑', true],
+  ['34642467703', '👑 Mystic - Collaborator 1 👑', true],
+  ['50499698072', '👑 Mystic - Collaborator 2 👑', true],
+  ['595986460945', '👑 Mystic - Collaborator 3 👑', true],
+  ['51940617554', '👑 Mystic - Collaborator 4 👑', true],
+  ['5219992095479'],
+  ['5219991402134'],
+  ['5219993404349'],
+  ['5219996125657']
+] // Cambia los numeros que quieras
+global.mods = [] 
+global.prems = [] 
 global.APIs = { // API Prefix
   // name: 'https://website'
+  amel: 'https://melcanz.com',
   bx: 'https://bx-hunter.herokuapp.com',
-  rey: 'https://server-api-rey.herokuapp.com',
-  hardianto: 'https://hardianto.xyz',
-  neoxr: 'https://neoxr-api.herokuapp.com',
   nrtm: 'https://nurutomo.herokuapp.com',
   xteam: 'https://api.xteam.xyz',
+  nzcha: 'http://nzcha-apii.herokuapp.com',
+  bg: 'http://bochil.ddns.net',
+  fdci: 'https://api.fdci.se',
+  dzx: 'https://api.dhamzxploit.my.id',
+  bsbt: 'https://bsbt-api-rest.herokuapp.com',
   zahir: 'https://zahirr-web.herokuapp.com',
-  lol: 'https://api.lolhuman.xyz',
-  caliph: 'https://caliphapi.com',
-  dhnjing: 'https://dhnjing.xyz',
   zeks: 'https://api.zeks.me',
+  hardianto: 'https://hardianto-chan.herokuapp.com',
+  pencarikode: 'https://pencarikode.xyz', 
+  LeysCoder: 'https://leyscoders-api.herokuapp.com',
+  adiisus: 'https://adiixyzapi.herokuapp.com',
+  lol: 'https://api.lolhuman.xyz',
   pencarikode: 'https://pencarikode.xyz',
-  fxc7: 'https://fxc7-api.herokuapp.com',
-  LeysCoder: 'https://leyscoders-api.herokuapp.com'
-}
+  Velgrynd: 'https://velgrynd.herokuapp.com',
+  rey: 'https://server-api-rey.herokuapp.com',
+  hardianto: 'http://hardianto-chan.herokuapp.com',
+  shadow: 'https://api.reysekha.xyz',
+  apialc: 'https://api-alc.herokuapp.com',
+  botstyle: 'https://botstyle-api.herokuapp.com',
+  neoxr: 'https://neoxr-api.herokuapp.com',
+  ana: 'https://anabotofc.herokuapp.com/',
+  kanx: 'https://kannxapi.herokuapp.com/',
+  dhnjing: 'https://dhnjing.xyz',
+  violetics: 'https://violetics.pw'
+},
 global.APIKeys = { // APIKey Here
-  // 'https://website': 'apikey' (apikey kalian^_^)
-  'https://server-api-rey.herokuapp.com': 'apirey',
+  // 'https://website': 'apikey'
+  'https://api-alc.herokuapp.com': 'ConfuMods',
+  'https://api.reysekha.xyz': 'apirey',
+  'https://melcanz.com': 'F3bOrWzY',
   'https://bx-hunter.herokuapp.com': 'Ikyy69',
-  'https://hardianto.xyz': 'hardianto',
-  'https://neoxr-api.herokuapp.com': 'yntkts',
-  'https://api.xteam.xyz': 'cristian9407',
-  'https://api.lolhuman.xyz': 'Dawnfrostkey',
-  'https://caliphapi.com': 'ELYASXD',
+  'https://api.xteam.xyz': '5bd33b276d41d6b4',
   'https://zahirr-web.herokuapp.com': 'zahirgans',
+  'https://bsbt-api-rest.herokuapp.com': 'benniismael',
   'https://api.zeks.me': 'apivinz',
-  'https://pencarikode.xyz': 'pais',
-  'https://fxc7-api.herokuapp.com': 'fxc7COOL',
-  'https://leyscoders-api.herokuapp.com': 'dappakntlll'
+  'https://hardianto-chan.herokuapp.com': 'hardianto',
+  'https://pencarikode.xyz': 'pais', 
+  'https://leyscoders-api.herokuapp.com': 'MIMINGANZ', 
+  'https://server-api-rey.herokuapp.com': 'apirey',
+  'https://api.lolhuman.xyz': '9b817532fadff8fc7cb86862',
+  'https://botstyle-api.herokuapp.com': 'Eyar749L',
+  'https://neoxr-api.herokuapp.com': 'yntkts',
+  'https://anabotofc.herokuapp.com/': 'AnaBot',
+  'https://violetics.pw': 'beta'
 }
 
 // Sticker WM
-const spack = fs.readFileSync("lib/exif.json")
-const stickerpack = JSON.parse(spack)
-if (stickerpack.spackname == '') {
-  var sticker_name = ''
-  var sticker_author = 'Created By Sabo'
-} else {
-  var sticker_name = stickerpack.spackname
-  var sticker_author = stickerpack.sauthor
+global.packname = '(☞ﾟ∀ﾟ)☞'
+global.author = '★𝚃𝚑𝚎 𝙼𝚢𝚜𝚝𝚒𝚌 - 𝙱𝚘𝚝★'
+
+global.wm = '★𝚃𝚑𝚎 𝙼𝚢𝚜𝚝𝚒𝚌 - 𝙱𝚘𝚝★'
+global.igfg = '★𝚃𝚑𝚎 𝙼𝚢𝚜𝚝𝚒𝚌 - 𝙱𝚘𝚝★'
+global.wait = '*⌛ _Cargando..._ ▬▬▬▭*'
+
+global.imagen1 = fs.readFileSync('./Menu2.jpg')
+global.imagen2 = fs.readFileSync('./src/nuevobot.jpg') 
+global.imagen3 = fs.readFileSync('./src/Pre Bot Publi.png')
+
+global.multiplier = 9999 
+
+global.rpg = {
+  emoticon(string) {
+    string = string.toLowerCase()
+    let emot = {
+      level: '🏆',
+      limit: '💎',
+      exp: '🕹️'
+    }
+    let results = Object.keys(emot).map(v => [v, new RegExp(v, 'gi')]).filter(v => v[1].test(string))
+    if (!results.length) return ''
+    else return emot[results[0][0]]
+  }
 }
 
-const file_exif = "lib/exif.json"
-fs.watchFile(file_exif, () => {
-  fs.unwatchFile(file_exif)
-  console.log(chalk.redBright("Update 'exif.json'"))
-  delete require.cache[file_exif]
-  require('./lib/exif.json')
-})
 
-global.packname = sticker_name
-global.author = sticker_author
-
-// silakan di ganti klo mau
-global.wait = '_Bentar Deck_'
-global.rpg = 'Fitur Rpg Dimatikan\nKetik *.enable* *rpg* untuk menggunakan fitur ini!\nKalo Mau main Disini aja\nhttps://chat.whatsapp.com/EheAWPrQMhV25xW0N7l7WD'
-global.nsfw = 'Yahaha Si Kontol Sangean'
-
-global.fla = 'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=water-logo&doScale=true&scaleWidth=500&scaleHeight=500&fontsize=100&fillTextType=0&backgroundColor=%23101820&text='
-global.watermark = 'Sabo' //change the watermark (beberapa harus manual)
-
-// Ubah saja
-global.image = 'https://telegra.ph/file/43a5bfd09e6c7e9a8055f.jpg'
-global.bank = 'https://telegra.ph/file/d5ddf4cc627bb0e6bc420.jpg'
-global.kandang = 'https://telegra.ph/file/67a6ee607d03a4e52757d.jpg'
-global.kolam = 'https://telegra.ph/file/5aa5dfa3394477e11fb18.jpg'
-global.thanks = 'https://telegra.ph/file/01917f7782b70de8f418d.jpg'
-
-// tingkat kesulitan, semakin tinggi semakin susah
-global.multiplier = 500 // The higher, The harder levelup
-
-//*****************PEMBATAS*********************
-// JANGAN DI GANTI NTAR KLO GABISA JAN TANYA GW
-
-let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-  fs.unwatchFile(file)
+let file = fileURLToPath(import.meta.url)
+watchFile(file, () => {
+  unwatchFile(file)
   console.log(chalk.redBright("Update 'config.js'"))
-  delete require.cache[file]
-  require(file)
+  import(`${file}?update=${Date.now()}`)
 })
