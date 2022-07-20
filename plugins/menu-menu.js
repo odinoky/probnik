@@ -110,6 +110,8 @@ let str = `
 ° ඬ⃟🎖️ _${usedPrefix}formarpareja_
 ° ඬ⃟🎖️ _${usedPrefix}verdad_
 ° ඬ⃟🎖️ _${usedPrefix}reto_
+° ඬ⃟🎖️ _${usedPrefix}cancion_
+° ඬ⃟🎖️ _${usedPrefix}pista_
 
 *<𝔸ℂ𝕋𝕀𝕍𝔸ℝ 𝕆 𝔻𝔼𝕊𝔸ℂ𝕋𝕀𝕍𝔸ℝ/>*
 
@@ -127,6 +129,8 @@ let str = `
 ° ඬ⃟☑️ _${usedPrefix}disable *audios*_
 ° ඬ⃟☑️ _${usedPrefix}enable *autosticker*_
 ° ඬ⃟☑️ _${usedPrefix}disable *autosticker*_
+° ඬ⃟☑️ _${usedPrefix}enable *antiviewonce*_
+° ඬ⃟☑️ _${usedPrefix}disable *antiviewonce*_
 
 *<ℝ𝔼ℙ𝕆ℝ𝕋𝔼𝕊 𝔻𝔼 𝔽𝔸𝕃𝕃𝕆𝕊/>*
 
@@ -399,6 +403,7 @@ _(𝑢𝑠𝑜 𝑠𝑖𝑛 𝑝𝑟𝑒𝑓𝑖𝑗𝑜)_
 *<ℍ𝔼ℝℝ𝔸𝕄𝕀𝔼ℕ𝕋𝔸𝕊/>*
 
 ° ඬ⃟🛠️ _${usedPrefix}afk *<motivo>*_
+° ඬ⃟🛠️ _${usedPrefix}ocr *<responde a imagen>*_
 ° ඬ⃟🛠️ _${usedPrefix}acortar *<enlace / link / url>*_
 ° ඬ⃟🛠️ _${usedPrefix}calc *<operacion math>*_
 ° ඬ⃟🛠️ _${usedPrefix}del *<respondre a mensaje del Bot>*_
