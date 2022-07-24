@@ -659,11 +659,11 @@ export async function participantsUpdate({ id, participants, action }) {
             break
         case 'promote':
         case 'daradmin':
-        case 'darpoder':
+        case 'датьадмина':
             text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
         case 'demote':
         case 'quitarpoder':
-        case 'quitaradmin':
+        case 'снятьадмина':
             if (!text)
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
