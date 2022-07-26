@@ -312,8 +312,6 @@ let texto1 = `╭═─═─═─═─═─═╮
 230╠ ${usedPrefix}stickerfilter
 232╠ ${usedPrefix}menucompleto
 233╠ ${usedPrefix}menuaudios
-234╠ ${usedPrefix}menu2
-235╠ ${usedPrefix}menu3
 236╠ ${usedPrefix}playlist
 237╠ ${usedPrefix}playlist2
 238╠ ${usedPrefix}xnxxsearch
