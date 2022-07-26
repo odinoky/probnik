@@ -370,7 +370,7 @@ contextInfo: {
 "mediaUrl": 'https://youtu.be/eC9TfKICpcY',
 "sourceUrl": 'https://www.pornhub.com' }}} 
 conn.sendMessage(m.chat, buttonMessage, fake)}
-handler.help = ['menu', 'help', '?']
+handler.help = ['menuu','меню']
 handler.tags = ['main']
 handler.command = /^(menucompleto|menu3|menú3|memu3|memú3|help3|info3|comandos3|allmenu3|ayuda3|commands3|commandos3)$/i
 export default handler
