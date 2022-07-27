@@ -312,6 +312,8 @@ let texto1 = `╭═─═─═─═─═─═╮
 230╠ ${usedPrefix}stickerfilter
 232╠ ${usedPrefix}menucompleto
 233╠ ${usedPrefix}menuaudios
+234╠ ${usedPrefix}menu2
+235╠ ${usedPrefix}menu3
 236╠ ${usedPrefix}playlist
 237╠ ${usedPrefix}playlist2
 238╠ ${usedPrefix}xnxxsearch
@@ -339,10 +341,13 @@ message: wm,
 orderTitle: 'WaBot',
 thumbnail: imagen2, 
 sellerJid: '0@s.whatsapp.net' }}}}      
-const owner = "996755994412@s.whatsapp.net"
+const owner = "5219992095479@s.whatsapp.net"
 var doc = ['pdf','zip','vnd.openxmlformats-officedocument.presentationml.presentation','vnd.openxmlformats-officedocument.spreadsheetml.sheet','vnd.openxmlformats-officedocument.wordprocessingml.document']
 var document = doc[Math.floor(Math.random() * doc.length)]
-const buttons = []
+const buttons = [
+{buttonId: `#donar`, buttonText: {displayText: '📮 𝙳𝙾𝙽𝙰𝚁 📮'}, type: 1},
+{buttonId: `#menuaudios`, buttonText: {displayText: '🔊 𝙼𝙴𝙽𝚄 𝙰𝚄𝙳𝙸𝙾𝚂 🔊'}, type: 1},
+{buttonId: `#menucompleto`, buttonText: {displayText: '💟 𝙼𝙴𝙽𝚄 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙾 💟'}, type: 1}, ]
 let buttonMessage = {
 document: imagen1, 
 fileName: `ᴇʟ ᴍᴇᴊᴏʀ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ⁩`, 
@@ -360,11 +365,14 @@ contextInfo: {
 "showAdAttribution": false,
 "title": `𝚃𝚄𝚃𝙾𝚁𝙸𝙰𝙻 𝙳𝙴 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝙲𝙸𝙾𝙽`,
 "mediaType": 2, 
+"previewType": "VIDEO",
+"thumbnail": imagen3,
+"mediaUrl": 'https://youtu.be/eC9TfKICpcY',
 "sourceUrl": 'https://www.pornhub.com' }}} 
 conn.sendMessage(m.chat, buttonMessage, fake)}
 handler.help = ['menu', 'help', '?']
 handler.tags = ['main']
-handler.command = /^(менюшка3)$/i
+handler.command = /^(menucompleto|menu3|menú3|memu3|memú3|help3|info3|comandos3|allmenu3|ayuda3|commands3|commandos3)$/i
 export default handler
 const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
