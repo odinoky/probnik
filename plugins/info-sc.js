@@ -3,10 +3,6 @@ var doc = ['pdf','zip','vnd.openxmlformats-officedocument.presentationml.present
 var document = doc[Math.floor(Math.random() * doc.length)]    
 let texto1 = `*ОНО ВАМ НЕНУЖНО*`
 let buttonMessage= {
-'document': { url: `https://natribu.org/media/na.mp3` },
-'fileName': `「  𝑯𝒆𝒍𝒍𝒐 𝑾𝒐𝒓𝒍𝒅 」`,
-'fileLength': 99999999999999,
-'pageCount': 200,
 'contextInfo': {
 'forwardingScore': 200,
 'isForwarded': true,
@@ -20,9 +16,6 @@ let buttonMessage= {
 'sourceUrl': 'https://natribu.org/media/na.mp3' }},
 'caption': texto1,
 'footer': wm,
-'buttons':[
-{buttonId: `${usedPrefix}менюшка`, buttonText: {displayText: '𝙼𝙴𝙽𝚄'}, type: 1}, 
-{buttonId: `${usedPrefix}donar`, buttonText: {displayText: '𝙳𝙾𝙽𝙰𝚁'}, type: 1}],
 'headerType': 6 }
 conn.sendMessage(m.chat, buttonMessage, { quoted: m })}
 handler.command = ['sc','script']
