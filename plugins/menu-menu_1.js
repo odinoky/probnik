@@ -360,14 +360,11 @@ contextInfo: {
 "showAdAttribution": false,
 "title": `𝚃𝚄𝚃𝙾𝚁𝙸𝙰𝙻 𝙳𝙴 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝙲𝙸𝙾𝙽`,
 "mediaType": 2, 
-"previewType": "VIDEO",
-"thumbnail": imagen3,
-"mediaUrl": 'https://youtu.be/eC9TfKICpcY',
 "sourceUrl": 'https://www.pornhub.com' }}} 
 conn.sendMessage(m.chat, buttonMessage, fake)}
-handler.help = ['менюшка']
+handler.help = ['menu', 'help', '?']
 handler.tags = ['main']
-handler.command = /^(менюшкааа)$/i
+handler.command = /^(менюшка3)$/i
 export default handler
 const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
