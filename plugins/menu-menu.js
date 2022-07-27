@@ -482,7 +482,7 @@ _(𝑢𝑠𝑜 𝑠𝑖𝑛 𝑝𝑟𝑒𝑓𝑖𝑗𝑜)_
 ° ඬ⃟👑 _${usedPrefix}delprem *<@tag>*_
 ° ඬ⃟👑 _${usedPrefix}listprem_
 `.trim()
-conn.sendHydrated2(m.chat, str, wm, pp, 'ВСЕ РАВНО НЕ ПОДКИНЕШЬ НА МОРОЖЕНКУ', 'ДОНАТ', 'https://wa.me/996755994412', 'ВЛАДЕЛЕЦ', [
+conn.sendHydrated2(m.chat, str, wm, pp, 'https://qiwi.com/n/GLENN362', 'ДОНАТ', 'https://wa.me/996755994412', 'ВЛАДЕЛЕЦ', [
 
 ], m,)
 //await conn.sendFile(m.chat, vn, 'menu.mp3', null, m, true, {
