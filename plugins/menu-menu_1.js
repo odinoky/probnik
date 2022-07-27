@@ -372,7 +372,7 @@ contextInfo: {
 conn.sendMessage(m.chat, buttonMessage, fake)}
 handler.help = ['menu', 'help', '?']
 handler.tags = ['main']
-handler.command = /^(menucompleto|menu3|menú3|memu3|memú3|help3|info3|comandos3|allmenu3|ayuda3|commands3|commandos3)$/i
+handler.command = /^(менюшка2)$/i
 export default handler
 const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
