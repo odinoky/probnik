@@ -20,7 +20,9 @@ let buttonMessage= {
 'sourceUrl': 'https://natribu.org/media/na.mp3' }},
 'caption': texto1,
 'footer': wm,
-'buttons':[],
+'buttons':[
+{buttonId: `${usedPrefix}менюшка`, buttonText: {displayText: '𝙼𝙴𝙽𝚄'}, type: 1}, 
+{buttonId: `${usedPrefix}donar`, buttonText: {displayText: '𝙳𝙾𝙽𝙰𝚁'}, type: 1}],
 'headerType': 6 }
 conn.sendMessage(m.chat, buttonMessage, { quoted: m })}
 handler.command = ['sc','script']
