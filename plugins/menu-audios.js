@@ -54,7 +54,7 @@ let str = `
 ° ඬ⃟🔊 _a_
 `.trim()
 conn.sendHydrated(m.chat, str, wm, pp, 'https://github.com/BrunoSobrino/TheMystic-Bot-MD', '𝙶𝙸𝚃𝙷𝚄𝙱', null, null, [
-['/menu']
+[]
 ], m)
 }}
 handler.help = ['menu2', 'help2', '?2', 'menuaudios']

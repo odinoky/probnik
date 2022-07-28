@@ -20,7 +20,7 @@ let donar =`
 *┃ ЗА РАНИЕ СПАСИБО ЗА ПОДДЕРЖКУ*
 *┗ ┅ ━━━━━━━━━ ┅ ━*
 `.trim()
-conn.sendHydrated(m.chat, donar, wm, null, 'https://qiwi.com/n/GLENN362', 'QIWI', null, null, [['/menu']], m)}
+conn.sendHydrated(m.chat, donar, wm, null, 'https://qiwi.com/n/GLENN362', 'QIWI', null, null, [], m)}
 handler.help = ['donasi']
 handler.tags = ['info']
 handler.command = /^dona(te|si)|donar|apoyar$/i

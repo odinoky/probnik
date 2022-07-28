@@ -51,7 +51,7 @@ let str = `
 ° ඬ⃟🗳️ _${usedPrefix}eliminarsticker *<texto/comando/palabra clave>*_`.trim()
 
 conn.sendHydrated(m.chat, str, wm, pp, 'https://github.com/BrunoSobrino/TheMystic-Bot-MD', '𝙶𝙸𝚃𝙷𝚄𝙱', null, null, [
-['/menu']
+[]
 ], m)
 }}
 handler.help = ['cajafuerte']
